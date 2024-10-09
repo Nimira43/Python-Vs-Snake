@@ -19,14 +19,17 @@ class Game(ctk.CTk):
     self.mainloop()
 
   def place_apple(self):
-    self.apple_pos = {randint(0, FIELDS[0] - 1), randint(0, FIELDS[1] - 1) }
+    self.apple_pos = (randint(0, FIELDS[0] - 1), randint(0, FIELDS[1] - 1))
 
   def draw(self):
+    apple_frame = ctk.CTkFrame(self, fg_color = APPLE_COLOUR)
+    self.draw_frames.append((apple_frame, self.apple_pos))
+
     for index, pos in enumerate(self.snake):
       colour = SNAKE_BODY_COLOUR if index != 0 else SNAKE_HEAD_COLOUR
       snake_frame = ctk.CTkFrame(self, fg_color= colour, corner_radius = 0)
-      # snake_frame.grid(column = pos[0], row = pos[1])
       self.draw_frames.append((snake_frame, pos))
-    for frame, pos in self.draw_frames
+    for frame, pos in self.draw_frames:
+      frame.grid(column = pos[0], row = pos[1])
 
 Game()
