@@ -17,7 +17,8 @@ class Game(ctk.CTk):
   
   def draw(self):
     for index, pos in enumerate(self.snake):
-      snake_frame = ctk.CTkFrame(self, fg_color= SNAKE_BODY_COLOUR, corner_radius = 0)
+      colour = SNAKE_BODY_COLOUR if index != 0 else SNAKE_HEAD_COLOUR
+      snake_frame = ctk.CTkFrame(self, fg_color= colour, corner_radius = 0)
       snake_frame.grid(column = pos[0], row = pos[1])
 
 
