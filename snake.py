@@ -17,8 +17,15 @@ class Game(ctk.CTk):
     
     self.place_apple()    
     self.draw_frames = []
-    self.draw()
+    self.animate()
     self.mainloop()
+  
+  def animate(self):
+    new_head = (self.snake[0][0] + self.direction[0], self.snake[0][1] + self.direction[1])
+    self.snake.insert(0, new_head)
+    self.snake.pop()
+    self.draw()
+    self.after(250, self.animate)
 
   def get_input(self, event):
     match event.keycode: 
