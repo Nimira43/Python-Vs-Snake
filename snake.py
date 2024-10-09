@@ -13,13 +13,12 @@ class Game(ctk.CTk):
     self.snake = [START_POS, (START_POS[0] - 1, START_POS[1]), (START_POS[0] - 2, START_POS[1])]
     self.draw()
 
-
     self.mainloop()
   
   def draw(self):
-    for col, row in self.snake:
-      snake_frame = ctk.CTkFrame(self, fg_color= 'blue')
-      snake_frame.grid(column = col, row = row)
+    for index, pos in enumerate(self.snake):
+      snake_frame = ctk.CTkFrame(self, fg_color= SNAKE_BODY_COLOUR, corner_radius = 0)
+      snake_frame.grid(column = pos[0], row = pos[1])
 
 
 Game()
