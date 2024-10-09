@@ -12,11 +12,20 @@ class Game(ctk.CTk):
     self.rowconfigure(list(range(FIELDS[1])), weight = 1, uniform = 'a')
     
     self.snake = [START_POS, (START_POS[0] - 1, START_POS[1]), (START_POS[0] - 2, START_POS[1])]
+    self.direction = DIRECTIONS['right']
+    self.bind('<Key>', self.get_input)
     
     self.place_apple()    
     self.draw_frames = []
     self.draw()
     self.mainloop()
+
+  def get_input(self, event):
+    match event.keycode: 
+      case 37: self.direction = DIRECTIONS['left']
+      case 38: self.direction = DIRECTIONS['up']
+      case 39: self.direction = DIRECTIONS['right']
+      case 40: self.direction = DIRECTIONS['down']
 
   def place_apple(self):
     self.apple_pos = (randint(0, FIELDS[0] - 1), randint(0, FIELDS[1] - 1))
