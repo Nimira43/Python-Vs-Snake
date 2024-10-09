@@ -11,8 +11,15 @@ class Game(ctk.CTk):
     self.rowconfigure(list(range(FIELDS[1])), weight = 1, uniform = 'a')
     
     self.snake = [START_POS, (START_POS[0] - 1, START_POS[1]), (START_POS[0] - 2, START_POS[1])]
+    self.draw()
 
 
     self.mainloop()
+  
+  def draw(self):
+    for col, row in self.snake:
+      snake_frame = ctk.CTkFrame(self, fg_color= 'blue')
+      snake_frame.grid(column = col, row = row)
+
 
 Game()
