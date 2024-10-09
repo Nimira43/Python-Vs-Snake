@@ -24,7 +24,7 @@ class Game(ctk.CTk):
   def animate(self):
     new_head = (self.snake[0][0] + self.direction[0], self.snake[0][1] + self.direction[1])
     self.snake.insert(0, new_head)
-    if self.snake[0] == self.apple.pos:
+    if self.snake[0] == self.apple_pos:
       self.place_apple()
     else:
       self.snake.pop()
@@ -41,7 +41,7 @@ class Game(ctk.CTk):
   def get_input(self, event):
     match event.keycode: 
       case 37: self.direction = DIRECTIONS['left'] if self.direction != DIRECTIONS['right'] else self.direction
-      case 38: self.direction = DIRECTIONS['up'] if  self.direction != DIRECTIONS['down'] else self.direction
+      case 38: self.direction = DIRECTIONS['up'] if self.direction != DIRECTIONS['down'] else self.direction
       case 39: self.direction = DIRECTIONS['right'] if self.direction != DIRECTIONS['left'] else self.direction
       case 40: self.direction = DIRECTIONS['down'] if self.direction != DIRECTIONS['up'] else self.direction
 
@@ -55,10 +55,10 @@ class Game(ctk.CTk):
       self.draw_frames.clear()
     apple_frame = ctk.CTkFrame(self, fg_color = APPLE_COLOUR)
     self.draw_frames.append((apple_frame, self.apple_pos))
-
+ 
     for index, pos in enumerate(self.snake):
       colour = SNAKE_BODY_COLOUR if index != 0 else SNAKE_HEAD_COLOUR
-      snake_frame = ctk.CTkFrame(self, fg_color= colour, corner_radius = 0)
+      snake_frame = ctk.CTkFrame(self, fg_color = colour, corner_radius = 0)
       self.draw_frames.append((snake_frame, pos))
     for frame, pos in self.draw_frames:
       frame.grid(column = pos[0], row = pos[1])
